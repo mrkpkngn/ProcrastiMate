@@ -1,0 +1,12 @@
+[
+  {
+    "id": 3,
+    "title": "Finish report",
+    "description": "Complete the monthly report",
+    "status": 0,
+    "created": "2025-09-30T08:15:00",
+    "deadline": "2025-10-03T17:00:00",
+    "assignedBy": "mrk.pkngn@gmail.com",
+    "assignedTo": "terezanova75@gmail.com"
+  }
+]

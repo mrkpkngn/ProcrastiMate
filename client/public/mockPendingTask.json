@@ -1,0 +1,32 @@
+[
+  {
+    "id": 1,
+    "title": "Clean the dishes",
+    "description": "I need to clean the dishes",
+    "status": 0,
+    "created": "2025-10-01T10:00:00",
+    "deadline": "2025-10-04T18:00:00",
+    "assignedBy": "mrk.pkngn@gmail.com",
+    "assignedTo": "terezanova75@gmail.com"
+  },
+  {
+    "id": 4,
+    "title": "Prepare presentation",
+    "description": "Prepare slides for meeting",
+    "status": 0,
+    "created": "2025-10-01T11:45:00",
+    "deadline": "2025-10-05T09:00:00",
+    "assignedBy": "mrk.pkngn@gmail.com",
+    "assignedTo": "terezanova75@gmail.com"
+  },
+  {
+    "id": 2,
+    "title": "Mop the floor",
+    "description": "I need to mop the floor",
+    "status": 0,
+    "created": "2025-10-02T09:30:00",
+    "deadline": "2025-10-04T12:00:00",
+    "assignedBy": "mrk.pkngn@gmail.com",
+    "assignedTo": ""
+  }
+]
