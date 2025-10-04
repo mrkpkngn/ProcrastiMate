@@ -1,26 +1,44 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #FFFCF9;
+  --foreground: #171717; 
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --font-poppins: "Poppins", sans-serif;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-poppins);
+}
+
+.pink-to-orange{
+  background: url(/client/public/noiseTexture.png) lightgray 50% / cover no-repeat, radial-gradient(58.45% 57.31% at 21.47% 50.3%, #FFAE8F 0%, rgba(253, 211, 246, 0.60) 100%);
+  background-blend-mode: color-burn, normal;
+}
+
+.blue-to-white{
+  background: url(/client/public/noiseTexture.png) lightgray 50% / cover no-repeat, radial-gradient(52.53% 50.79% at 39.57% 50.3%, rgba(207, 255, 230, 0.83) 0%, #B6E1FF 100%);
+  background-blend-mode: color-burn, normal;
+}
+
+.purple-to-pink{
+  background: url(/client/public/noiseTexture.png) lightgray 50% / cover no-repeat, radial-gradient(64.81% 101.28% at 74.95% 46.12%, rgba(252, 180, 209, 0.72) 0%, rgba(138, 119, 236, 0.60) 56.26%, rgba(56, 76, 255, 0.51) 100%);
+  background-blend-mode: color-burn, normal;
+}
+
+.blue-to-purple{
+  background: url(/client/public/noiseTexture.png) lightgray 50% / cover no-repeat, radial-gradient(87.75% 85.42% at 82.52% 21.01%, #B8A9FF 12.75%, #BDD4FF 100%);
+  background-blend-mode: color-burn, normal;
+}
+
+.green-to-white{
+  background: url(/client/public/noiseTexture.png) lightgray 50% / cover no-repeat, radial-gradient(51.72% 49.86% at 50% 50.14%, #EFF1C2 0%, #DDE255 100%);
+  background-blend-mode: color-burn, normal;
 }
