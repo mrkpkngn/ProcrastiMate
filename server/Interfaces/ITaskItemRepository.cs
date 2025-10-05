@@ -10,11 +10,13 @@ namespace server.Interfaces
     public interface ITaskItemRepository
     {
         Task<List<TaskItem>> GetAllAsync();
-        Task<List<TaskItem>> GetAllByAssignedByAsync(string userEmail);
+        Task<List<TaskItem>> GetAllTasksForUser(string userEmail);
+        Task<List<TaskItem>> GetAllByFilter(string userEmail, int status);
+        Task<List<TaskItem>> GetAllDueToday(string userEmail);
         Task<TaskItem?> GetByIDAsync(int id);
         Task<TaskItem> CreateAsync(TaskItem taskItem);
         Task<TaskItem?> UpdateAsync(int id, UpdateTaskItemDTO taskItemDTO);
-        Task<TaskItem?> DeleteAsync(int id);
+        Task<TaskItem?> DeleteAsync(string userEmail, int id);
 
     }
 }

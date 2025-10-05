@@ -7,9 +7,9 @@ namespace server.Models
 {
     public enum Status
     {
-        Pending, // 0
-        Done, // 1
-        Overdue, // 2
+        Pending = 0, // 0
+        Done = 1, // 1
+        Overdue = 2, // 2
     }
     public class TaskItem
     {

@@ -2,6 +2,7 @@ import Image from 'next/image'
 import { useState } from 'react'
 import { useRouter } from 'next/navigation';
 import AddTask from './AddTask';
+import { TaskProvider } from '../context/TaskProvider';
 
 type NavbarProp = {
     fullName: string | null

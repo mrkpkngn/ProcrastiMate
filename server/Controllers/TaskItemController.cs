@@ -7,11 +7,12 @@ using server.Datas;
 using server.DTOs;
 using server.Interfaces;
 using server.Mappers;
+using server.Models;
 using server.Repositories;
 
 namespace server.Controllers
 {
-    [Route("server/models")]
+    [Route("api/tasks")]
     [ApiController]
     public class TaskItemController : ControllerBase
     {
@@ -27,7 +28,25 @@ namespace server.Controllers
         public async Task<IActionResult> GetAll([FromHeader(Name = "User-Email")] string userEmail)
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
-            var tasks = await _repo.GetAllByAssignedByAsync(userEmail);
+            var tasks = await _repo.GetAllTasksForUser(userEmail);
+            var taskDto = tasks.Select(x => x.ToTaskItemDTO());
+            return Ok(taskDto);
+        }
+
+        [HttpGet("filter")]
+        public async Task<IActionResult> GetByFilter([FromHeader(Name = "User-Email")] string userEmail, [FromQuery] int status)
+        {
+            if (!ModelState.IsValid) return BadRequest(ModelState);
+            var tasks = await _repo.GetAllByFilter(userEmail, status);
+            var taskDto = tasks.Select(x => x.ToTaskItemDTO());
+            return Ok(taskDto);
+        }
+
+        [HttpGet("duetoday")]
+        public async Task<IActionResult> GetDueToday([FromHeader(Name = "User-Email")] string userEmail)
+        {
+            if (!ModelState.IsValid) return BadRequest(ModelState);
+            var tasks = await _repo.GetAllDueToday(userEmail);
             var taskDto = tasks.Select(x => x.ToTaskItemDTO());
             return Ok(taskDto);
         }
@@ -73,10 +92,10 @@ namespace server.Controllers
 
         [HttpDelete]
         [Route("{id:int}")]
-        public async Task<IActionResult> Delete([FromRoute] int id)
+        public async Task<IActionResult> Delete([FromHeader(Name ="User-Email")] string userEmail, [FromRoute] int id)
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
-            var taskItem = await _repo.DeleteAsync(id);
+            var taskItem = await _repo.DeleteAsync(userEmail, id);
             if (taskItem != null)
             {
                 return NoContent();
