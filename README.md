@@ -13,3 +13,7 @@ ProcrastiMate is a full-stack productivity app for managing tasks, tracking dead
 ## 🧠 Tech Stack
 - Frontend: Next.js, React, TypeScript, Tailwind CSS
 - Backend: ASP.NET Core, Entity Framework Core
+
+## Try it out!
+**❗ API is hosted with free tier of Render, first try might take a minute to respond since the server has been put to hibernation. Thank you for understanding! ❗**
+<br/> This project can be tested at https://procrastimate.vercel.app
