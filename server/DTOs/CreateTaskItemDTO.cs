@@ -18,7 +18,7 @@ namespace server.DTOs
         [MaxLength(120, ErrorMessage = "Description cannot be over 120 characters.")]
         public string Description { get; set; } = string.Empty;
         public Status status { get; set; } = Status.Pending;
-        public DateTime Deadline { get; set; }
+        public DateTimeOffset? Deadline { get; set; }
         [Required]
         [EmailAddress]
         public string AssignedBy { get; set; } = string.Empty;

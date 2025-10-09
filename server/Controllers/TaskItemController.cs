@@ -92,13 +92,39 @@ namespace server.Controllers
 
         [HttpDelete]
         [Route("{id:int}")]
-        public async Task<IActionResult> Delete([FromHeader(Name ="User-Email")] string userEmail, [FromRoute] int id)
+        public async Task<IActionResult> Delete([FromHeader(Name = "User-Email")] string userEmail, [FromRoute] int id)
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
             var taskItem = await _repo.DeleteAsync(userEmail, id);
             if (taskItem != null)
             {
                 return NoContent();
+            }
+
+            return NotFound();
+        }
+
+        [HttpPut("{id:int}/done")]
+        public async Task<IActionResult> MarkAsDone([FromHeader(Name = "User-Email")] string userEmail, [FromRoute] int id)
+        {
+            if (!ModelState.IsValid) return BadRequest(ModelState);
+            var taskItem = await _repo.MarkAsDoneAsync(userEmail, id);
+            if (taskItem != null)
+            {
+                return Ok(taskItem.ToTaskItemDTO());
+            }
+
+            return NotFound();
+        }
+
+        [HttpPut("{id:int}/pending")]
+        public async Task<IActionResult> MarkAsPending([FromHeader(Name = "User-Email")] string userEmail, [FromRoute] int id)
+        {
+            if (!ModelState.IsValid) return BadRequest(ModelState);
+            var taskItem = await _repo.MarkAsPendingAsync(userEmail, id);
+            if (taskItem != null)
+            {
+                return Ok(taskItem.ToTaskItemDTO());
             }
 
             return NotFound();

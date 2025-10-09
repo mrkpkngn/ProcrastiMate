@@ -15,6 +15,7 @@ interface TaskContextType {
   setFilter: (filter: string) => void;
   fetchTasks: () => void;
   deleteTask: (id: number) => void;
+  updateTask: (updatedTask: TaskItem) => void;
 }
 
 export const TaskContext = createContext<TaskContextType | undefined>(undefined);
@@ -77,6 +78,35 @@ const deleteTask = (id: number) => {
   setOverdueTask(prev => prev.filter(task => task.id !== id));
 };
 
+const updateTask = (updatedTask: TaskItem) => {
+  setTaskList(prev => prev.map(task => task.id === updatedTask.id ? updatedTask : task));
+
+  setPendingTask(prev => {
+    return updatedTask.status === 0
+      ? [...prev.filter(t => t.id !== updatedTask.id), updatedTask]
+      : prev.filter(t => t.id !== updatedTask.id);
+  });
+
+  setDoneTask(prev => {
+    return updatedTask.status === 1
+      ? [...prev.filter(t => t.id !== updatedTask.id), updatedTask]
+      : prev.filter(t => t.id !== updatedTask.id);
+  });
+
+  setOverdueTask(prev => {
+    return updatedTask.status === 2
+      ? [...prev.filter(t => t.id !== updatedTask.id), updatedTask]
+      : prev.filter(t => t.id !== updatedTask.id);
+  });
+
+
+  setDueTodayTask(prev => {
+    const isDueToday = new Date(updatedTask.deadline).toDateString() === new Date().toDateString();
+    if(isDueToday) return [...prev.filter(t => t.id !== updatedTask.id), updatedTask];
+    else return prev.filter(t => t.id !== updatedTask.id);
+  });
+};
+
 
   useEffect(() => {
     setEmail(localStorage.getItem("User-Email"));
@@ -134,7 +164,7 @@ useEffect(() => {
   }, [filter, email])
 
   return(
-    <TaskContext.Provider value={{ taskList, pendingTask, dueTodayTask, doneTask, overdueTask, filter, addTask, setFilter, fetchTasks, deleteTask }}>
+    <TaskContext.Provider value={{ taskList, pendingTask, dueTodayTask, doneTask, overdueTask, filter, addTask, setFilter, fetchTasks, deleteTask, updateTask }}>
         {children}
     </TaskContext.Provider>
   )

@@ -17,6 +17,8 @@ namespace server.Interfaces
         Task<TaskItem> CreateAsync(TaskItem taskItem);
         Task<TaskItem?> UpdateAsync(int id, UpdateTaskItemDTO taskItemDTO);
         Task<TaskItem?> DeleteAsync(string userEmail, int id);
+        Task<TaskItem?> MarkAsDoneAsync(string userEmail, int id);
+        Task<TaskItem?> MarkAsPendingAsync(string userEmail, int id);
 
     }
 }

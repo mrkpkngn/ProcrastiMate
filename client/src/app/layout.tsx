@@ -9,8 +9,8 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: "Procrastimate",
-  description: "Get things done! ... eventually",
+  title: "ProcrastiMate",
+  description: "Because procrastinating needs planning too.",
 };
 
 export default function RootLayout({
@@ -21,7 +21,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${poppins.variable} antialiased`}
+        className={`${poppins.variable} antialiased min-h-[100dvh]`}
       >
         {children}
       </body>

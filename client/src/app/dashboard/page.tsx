@@ -27,7 +27,9 @@ export default function Page()
     return(
         <TaskProvider>
             <Navbar fullName={fullName} />
-            <Dashboard fullName={fullName} />
+            <div className="flex flex-col items-center w-full">
+                <Dashboard fullName={fullName} />
+            </div>
         </TaskProvider>
 
     )

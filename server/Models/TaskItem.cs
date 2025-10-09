@@ -17,8 +17,8 @@ namespace server.Models
         public string Title { get; set; } = string.Empty;
         public string Description { get; set; } = string.Empty;
         public Status status { get; set; } = Status.Pending;
-        public DateTime Created { get; set; }
-        public DateTime Deadline { get; set; }
+        public DateTimeOffset Created { get; set; }
+        public DateTimeOffset? Deadline { get; set; }
         public string AssignedBy { get; set; } = string.Empty;
         public string? AssignedTo { get; set; }
     }

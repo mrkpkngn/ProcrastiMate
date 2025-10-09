@@ -37,11 +37,11 @@ namespace ProcrastiMate.Migrations
                     b.Property<string>("AssignedTo")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("Created")
-                        .HasColumnType("datetime2");
+                    b.Property<DateTimeOffset>("Created")
+                        .HasColumnType("datetimeoffset");
 
-                    b.Property<DateTime>("Deadline")
-                        .HasColumnType("datetime2");
+                    b.Property<DateTimeOffset?>("Deadline")
+                        .HasColumnType("datetimeoffset");
 
                     b.Property<string>("Description")
                         .IsRequired()

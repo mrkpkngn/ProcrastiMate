@@ -35,6 +35,10 @@ namespace server.Repositories
                 {
                     task.status = Status.Overdue;
                 }
+                else if (task.Deadline >= now && task.status != Status.Done)
+                {
+                    task.status = Status.Pending;
+                }
             }
 
             await _dbContext.SaveChangesAsync();
@@ -60,18 +64,30 @@ namespace server.Repositories
             {
                 taskItemModel.Title = taskItem.Title;
                 taskItemModel.Description = taskItem.Description;
-                taskItemModel.status = taskItem.status;
                 taskItemModel.Deadline = taskItem.Deadline;
-                if (taskItem.AssignedTo != null)
+
+                taskItemModel.AssignedTo = taskItem.AssignedTo;
+
+                if (taskItemModel.status != Status.Done)
                 {
-                    taskItemModel.AssignedTo = taskItem.AssignedTo;
+                    var now = DateTime.Now;
+                    if (taskItem.Deadline < now)
+                    {
+                        taskItemModel.status = Status.Overdue;
+                    }
+                    else
+                    {
+                        taskItemModel.status = Status.Pending;
+                    }
                 }
+
                 await _dbContext.SaveChangesAsync();
                 return taskItemModel;
             }
 
             return null;
         }
+
 
         public async Task<TaskItem?> DeleteAsync(string userEmail, int id)
         {
@@ -99,6 +115,30 @@ namespace server.Repositories
              .Where(x => x.AssignedBy == userEmail || x.AssignedTo == userEmail)
              .Where(x => x.Deadline >= DateTime.Today && x.Deadline < DateTime.Today.AddDays(1))
              .ToListAsync();
+        }
+
+        public async Task<TaskItem?> MarkAsDoneAsync(string userEmail, int id)
+        {
+            var taskItem = await _dbContext.TaskItems.FirstOrDefaultAsync(x => x.Id == id && (x.AssignedBy == userEmail || x.AssignedTo == userEmail));
+            if (taskItem != null)
+            {
+                taskItem.status = Status.Done;
+                _dbContext.SaveChanges();
+                return taskItem;
+            }
+            return null;
+        }
+        
+                public async Task<TaskItem?> MarkAsPendingAsync(string userEmail, int id)
+        {
+            var taskItem = await _dbContext.TaskItems.FirstOrDefaultAsync(x => x.Id == id && (x.AssignedBy == userEmail || x.AssignedTo == userEmail));
+            if (taskItem != null)
+            {
+                taskItem.status = Status.Pending;
+                _dbContext.SaveChanges();
+                return taskItem;
+            }
+            return null;
         }
     }
 }
