@@ -23,9 +23,9 @@ var mongoConnectionString =
 
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowNextJS", policy =>
+    options.AddPolicy("AllowVercel", policy =>
     {
-        policy.WithOrigins("https://procrastimate.vercel.app/") // Next.js origin
+        policy.WithOrigins("https://procrastimate.vercel.app") // Next.js origin
               .AllowAnyHeader()
               .AllowAnyMethod();
     });
@@ -47,7 +47,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseCors("AllowNextJS");
+app.UseCors("AllowVercel");
 app.UseHttpsRedirection();
 app.MapControllers();
 app.Run();
