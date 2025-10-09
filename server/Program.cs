@@ -25,7 +25,7 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowNextJS", policy =>
     {
-        policy.WithOrigins("https://procrastimate.vercel.app") // Next.js origin
+        policy.WithOrigins("https://procrastimate.vercel.app/") // Next.js origin
               .AllowAnyHeader()
               .AllowAnyMethod();
     });
